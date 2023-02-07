@@ -1,2 +1,4 @@
 # javarock.github.io
-Javarock's blog
+welcome Javarock's blog
+
+## One side survival ,one side life
