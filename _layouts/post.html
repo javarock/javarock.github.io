@@ -1,0 +1,48 @@
+---
+layout: default
+---
+
+<article>
+  <h1>{{ page.title }}</h1>
+  <p class="post-meta">
+    <time datetime="{{ page.date | date_to_xmlschema }}">
+      {{ page.date | date: "%Y年%m月%d日" }}
+    </time>
+    {% if page.author %}
+      by {{ page.author }}
+    {% endif %}
+  </p>
+  
+  {% if page.tags %}
+  <div class="tags">
+    标签：
+    {% for tag in page.tags %}
+      <span class="tag">#{{ tag }}</span>
+    {% endfor %}
+  </div>
+  {% endif %}
+  
+  <div class="post-content">
+    {{ content }}
+  </div>
+</article>
+
+<style>
+  .tags {
+    margin: 1rem 0;
+  }
+  
+  .tag {
+    display: inline-block;
+    background: #f0f0f0;
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    margin-right: 0.5rem;
+  }
+  
+  .post-content {
+    margin-top: 2rem;
+    line-height: 1.8;
+  }
+</style>

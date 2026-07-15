@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Javarock's Blog - 本地预览</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background: #f5f5f5;
+    }
+    
+    header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 2rem 0;
+      margin-bottom: 2rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+    
+    .site-title {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .site-description {
+      font-size: 1rem;
+      opacity: 0.9;
+    }
+    
+    nav {
+      background: white;
+      padding: 1rem 0;
+      margin-bottom: 2rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+    }
+    
+    nav a {
+      color: #667eea;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    
+    nav a:hover {
+      color: #764ba2;
+    }
+    
+    nav a.active {
+      border-bottom: 2px solid #667eea;
+      padding-bottom: 0.5rem;
+    }
+    
+    main {
+      background: white;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      margin-bottom: 2rem;
+    }
+    
+    h1, h2, h3 {
+      color: #667eea;
+      margin-top: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.5rem; }
+    h3 { font-size: 1.2rem; }
+    
+    p {
+      margin-bottom: 1rem;
+    }
+    
+    .post-meta {
+      color: #999;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+    
+    .post-excerpt {
+      margin: 1rem 0;
+    }
+    
+    .read-more {
+      display: inline-block;
+      background: #667eea;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: background 0.3s;
+      cursor: pointer;
+      border: none;
+      font-size: 1rem;
+    }
+    
+    .read-more:hover {
+      background: #764ba2;
+    }
+    
+    footer {
+      background: #333;
+      color: white;
+      text-align: center;
+      padding: 2rem;
+      margin-top: 2rem;
+    }
+    
+    .hero {
+      text-align: center;
+      padding: 2rem;
+      background: linear-gradient(135deg, rgba(102,126,234,0.1), rgba(118,75,162,0.1));
+      border-radius: 8px;
+      margin-bottom: 2rem;
+    }
+    
+    .hero h1 {
+      color: #667eea;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    .hero p {
+      font-size: 1.2rem;
+      color: #666;
+    }
+    
+    .post-preview {
+      border-bottom: 1px solid #eee;
+      padding: 1.5rem 0;
+    }
+    
+    .post-preview:last-child {
+      border-bottom: none;
+    }
+    
+    .post-preview h3 {
+      margin-top: 0;
+    }
+    
+    .post-preview h3 a {
+      color: #667eea;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    
+    .post-preview h3 a:hover {
+      text-decoration: underline;
+    }
+    
+    .tags {
+      margin: 1rem 0;
+    }
+    
+    .tag {
+      display: inline-block;
+      background: #f0f0f0;
+      padding: 0.3rem 0.6rem;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      margin-right: 0.5rem;
+    }
+    
+    .post-content {
+      margin-top: 2rem;
+      line-height: 1.8;
+    }
+    
+    .page {
+      display: none;
+    }
+    
+    .page.active {
+      display: block;
+    }
+    
+    blockquote {
+      border-left: 4px solid #667eea;
+      padding-left: 1rem;
+      margin: 1rem 0;
+      color: #666;
+    }
+    
+    code {
+      background: #f4f4f4;
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+      font-family: 'Courier New', monospace;
+    }
+    
+    pre {
+      background: #f4f4f4;
+      padding: 1rem;
+      border-radius: 4px;
+      overflow-x: auto;
+      margin: 1rem 0;
+    }
+    
+    pre code {
+      padding: 0;
+      background: none;
+    }
+    
+    .tip {
+      background: #e7f3ff;
+      border-left: 4px solid #667eea;
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1 class="site-title">Javarock's Blog</h1>
+      <p class="site-description">一边生存，一边生活</p>
+    </div>
+  </header>
+  
+  <nav>
+    <div class="container">
+      <ul>
+        <li><a href="javascript:showPage('home')" class="nav-link" id="nav-home">首页</a></li>
+        <li><a href="javascript:showPage('blog')" class="nav-link" id="nav-blog">博客</a></li>
+        <li><a href="javascript:showPage('about')" class="nav-link" id="nav-about">关于</a></li>
+      </ul>
+    </div>
+  </nav>
+  
+  <div class="container">
+    <!-- 首页 -->
+    <main class="page active" id="page-home">
+      <section class="hero">
+        <h1>欢迎来到我的博客</h1>
+        <p>这里记录我关于生存和生活的思考。</p>
+      </section>
+
+      <section class="latest-posts">
+        <h2>最新文章</h2>
+        
+        <article class="post-preview">
+          <h3><a href="javascript:showPage('post-welcome')">欢迎来到我的博客</a></h3>
+          <p class="post-meta">2026年07月15日</p>
+          <p class="post-excerpt">这是我博客的第一篇文章！非常高兴你能来到这里。 我创建这个博客是为了：记录想法、分享经验、交流思想、建立连接...</p>
+          <a href="javascript:showPage('post-welcome')" class="read-more">继续阅读 →</a>
+        </article>
+      </section>
+    </main>
+
+    <!-- 博客列表 -->
+    <main class="page" id="page-blog">
+      <h1>所有文章</h1>
+      <div class="post-list">
+        <article class="post-item">
+          <h3><a href="javascript:showPage('post-welcome')">欢迎来到我的博客</a></h3>
+          <p class="post-meta">
+            <time>2026年07月15日</time> | 作者：Javarock
+          </p>
+          <p class="post-excerpt">这是我博客的第一篇文章！非常高兴你能来到这里。我创建这个博客是为了：1. 记录想法 - 将脑海中的想法落实成文字 2. 分享经验 - 与他人分享我的学习和成长历程 3. 交流思想 - 与志同道合的朋友讨论和交流...</p>
+          <a href="javascript:showPage('post-welcome')" class="read-more">继续阅读 →</a>
+        </article>
+      </div>
+    </main>
+
+    <!-- 关于页面 -->
+    <main class="page" id="page-about">
+      <h1>关于 Javarock</h1>
+      <p>嗨，我是 Javarock！</p>
+      <p>欢迎来到我的个人博客。这是一个记录生活、分享想法的地方。</p>
+      
+      <h2>我的座右铭</h2>
+      <blockquote>一边生存，一边生活</blockquote>
+      <p>这句话对我很有意义。生存是基础，但生活才是目的。在这个博客上，我分享关于：</p>
+      <ul style="margin-left: 2rem; margin-bottom: 1rem;">
+        <li>💻 技术和编程</li>
+        <li>📚 阅读和学习</li>
+        <li>🌍 生活感悟</li>
+        <li>🎯 目标和梦想</li>
+        <li>🎨 创意和想法</li>
+      </ul>
+      
+      <h2>联系我</h2>
+      <p>如果你有任何问题或想法，欢迎通过以下方式联系我：</p>
+      <ul style="margin-left: 2rem; margin-bottom: 1rem;">
+        <li>Email: your-email@example.com</li>
+        <li>GitHub: <a href="https://github.com/javarock" target="_blank">@javarock</a></li>
+        <li>Twitter: <a href="https://twitter.com/javarock" target="_blank">@javarock</a></li>
+      </ul>
+      
+      <p style="margin-top: 2rem; color: #999;">感谢你的访问！希望你能在这里找到有价值的内容。</p>
+    </main>
+
+    <!-- 文章详情 -->
+    <main class="page" id="page-post-welcome">
+      <article>
+        <h1>欢迎来到我的博客</h1>
+        <p class="post-meta">
+          2026年07月15日 | 作者：Javarock
+        </p>
+        
+        <div class="tags">
+          标签：
+          <span class="tag">#生活</span>
+          <span class="tag">#分享</span>
+        </div>
+        
+        <div class="post-content">
+          <p>这是我博客的第一篇文章！非常高兴你能来到这里。</p>
+
+          <h2>关于这个博客</h2>
+          <p>我创建这个博客是为了：</p>
+          <ol style="margin-left: 2rem; margin-bottom: 1rem;">
+            <li><strong>记录想法</strong> - 将脑海中的想法落实成文字</li>
+            <li><strong>分享经验</strong> - 与他人分享我的学习和成长历程</li>
+            <li><strong>交流思想</strong> - 与志同道合的朋友讨论和交流</li>
+            <li><strong>建立连接</strong> - 通过写作与世界建立更深的联系</li>
+          </ol>
+
+          <h2>博客的内容</h2>
+          <p>你可以期待在这个博客上看到：</p>
+          <ul style="margin-left: 2rem; margin-bottom: 1rem;">
+            <li><strong>技术文章：</strong>关于编程、开发和软件设计的内容</li>
+            <li><strong>生活感悟：</strong>关于人生、成长和目标的思考</li>
+            <li><strong>读书笔记：</strong>分享阅读的收获和感悟</li>
+            <li><strong>项目分享：</strong>介绍我正在做的有趣项目</li>
+          </ul>
+
+          <h2>一句话</h2>
+          <blockquote>一边生存，一边生活 —— 这是我的座右铭，也是这个博客的主题。</blockquote>
+
+          <p>在快速变化的世界中，我们需要既懂得生存的方式，也要记住生活的意义。希望通过这个平台，我们能共同探索如何更好地生活。</p>
+
+          <hr style="margin: 2rem 0; border: none; border-top: 1px solid #eee;">
+          
+          <p>感谢阅读！如果你有任何想法或建议，欢迎通过评论或邮件与我联系。</p>
+          <p>期待与你的交流！✨</p>
+
+          <div class="tip" style="margin-top: 2rem;">
+            💡 <strong>提示：</strong> 这是一个本地预览版本。实际的 Jekyll 博客需要通过 <code>bundle exec jekyll serve</code> 在本地运行，或推送到 GitHub Pages 后在线查看。
+          </div>
+        </div>
+
+        <p style="margin-top: 2rem;">
+          <a href="javascript:showPage('blog')" style="color: #667eea; text-decoration: none;">← 返回博客列表</a>
+        </p>
+      </article>
+    </main>
+  </div>
+  
+  <footer>
+    <p>&copy; 2026 Javarock. All rights reserved.</p>
+    <p style="margin-top: 0.5rem; font-size: 0.9rem; color: #999;">
+      <a href="http://localhost:4000" style="color: #999; text-decoration: none;">本地预览版本</a> | 
+      <a href="https://github.com/javarock/javarock.github.io" style="color: #999; text-decoration: none;" target="_blank">GitHub</a>
+    </p>
+  </footer>
+
+  <script>
+    function showPage(pageId) {
+      // 隐藏所有页面
+      const pages = document.querySelectorAll('.page');
+      pages.forEach(page => page.classList.remove('active'));
+      
+      // 移除所有导航链接的 active 样式
+      const navLinks = document.querySelectorAll('.nav-link');
+      navLinks.forEach(link => link.classList.remove('active'));
+      
+      // 显示选中的页面
+      const targetPage = document.getElementById('page-' + pageId);
+      if (targetPage) {
+        targetPage.classList.add('active');
+      }
+      
+      // 添加导航链接的 active 样式
+      if (pageId.startsWith('post-')) {
+        // 文章页面时不高亮导航
+      } else {
+        const navLink = document.getElementById('nav-' + pageId);
+        if (navLink) {
+          navLink.classList.add('active');
+        }
+      }
+      
+      // 滚动到顶部
+      window.scrollTo(0, 0);
+    }
+    
+    // 初始化
+    document.getElementById('nav-home').classList.add('active');
+  </script>
+</body>
+</html>
