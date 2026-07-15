@@ -1,10 +1,12 @@
 source "https://rubygems.org"
 
-gem "jekyll", "~> 4.3.2"
-gem "github-pages", group: :jekyll_plugins
+ruby "~> 2.6"
+
+gem "jekyll", "~> 3.9"
+gem "ffi", "~> 1.12"
 
 group :jekyll_plugins do
-  gem "jekyll-feed", "~> 0.17.0"
-  gem "jekyll-seo-tag", "~> 2.8.0"
-  gem "jekyll-paginate", "~> 1.1.0"
+  gem "jekyll-feed", "~> 0.12"
+  gem "jekyll-seo-tag", "~> 2.6"
+  gem "jekyll-paginate", "~> 1.1"
 end
